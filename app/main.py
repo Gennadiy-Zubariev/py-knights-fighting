@@ -92,8 +92,12 @@ KNIGHTS = {
 def battle(knights_config: dict) -> dict:
     knights_dict = {}
     for knight_name, knight_info in knights_config.items():
-        if not knight_info.get("name") or not knight_info.get("hp") or not knight_info.get("power"):
-            raise ValueError(f"Knight {knight_name} has missing required attributes")
+        if (
+            not knight_info.get("name")
+            or not knight_info.get("hp")
+            or not knight_info.get("power")
+        ):
+            raise ValueError(f"{knight_name} has missing required attributes")
         knights_dict[knight_name] = Knight(**knight_info)
 
     Battle.fight(knights_dict["lancelot"], knights_dict["mordred"])
@@ -101,7 +105,7 @@ def battle(knights_config: dict) -> dict:
 
     return {
         knight.name: knight.hp for knight in knights_dict.values()
-    }       
+    }
 
 
 print(battle(KNIGHTS))
